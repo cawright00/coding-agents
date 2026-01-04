@@ -258,4 +258,4 @@ Once the plan is saved, I will ask:
 
 **"Ready to begin implementation?"**
 
-If yes, we can start working through the tasks systematically.
+If yes, we can start working through the tasks systematically by calling the Execute Plan Workflow.

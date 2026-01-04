@@ -331,4 +331,4 @@ Once the spec is complete, I will ask:
 
 **"Ready to set up for implementation?"**
 
-If yes, we can proceed to create a detailed implementation plan.
+If yes, we can proceed to create a detailed implementation plan by calling the Create Plan Workflow.
