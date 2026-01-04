@@ -41,6 +41,9 @@ Then I will ensure the output directory exists:
 
 The final spec will be saved as: `<git-folder>/claude/<project-name>/plans/SPEC-<idea-title>-YYYY-MM-DD.md`
 
+idea-title should be a short, kebab-case summary of the issue. Pay attention to the user's description of the issue. If a Jira ticket is mentioned, include it as the first thing in the idea-title. Jira tickets look like DS24-123, where 123 is a sample Jira ticket number. So if the user mentions Jira ticket DS24-2113, the idea-title might be:
+DS24-2113-fix-error-dialog
+
 ---
 
 ## Step 3: Understand the Project Context
@@ -134,7 +137,8 @@ Sections will cover:
 - **Components**: Individual pieces and their responsibilities  
 - **Data Flow**: How information moves through the system
 - **Error Handling**: What can go wrong and how we handle it
-- **Testing Strategy**: How we'll verify it works (including test framework choice)
+- **Acceptance Criteria**: *What* do we need to verify to prove that the issue works as expected
+- **Testing Strategy**: *How* we'll verify it works (including test framework choice)
 
 I'll be ready to go back and clarify if something doesn't make sense.
 
@@ -199,6 +203,10 @@ The document will include:
 
 [What can go wrong and how we handle it]
 
+## Acceptance Criteria
+
+[A bulleted list of the criteria that will prove that the feature/fix works as expected]
+
 ## Testing Strategy
 
 [How we'll verify the implementation works]
@@ -245,4 +253,4 @@ Once the spec is complete, I will ask:
 
 **"Ready to set up for implementation?"**
 
-If yes, we can proceed to create a detailed implementation plan.
+If yes, we can proceed to create a detailed implementation plan by calling the Create Plan Workflow.
