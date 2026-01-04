@@ -39,10 +39,9 @@ Then I will ensure the output directory exists:
 # Actual path will be determined from pwd output
 ```
 
-The final spec will be saved as: `<git-folder>/claude/<project-name>/plans/SPEC-<idea-title>-YYYY-MM-DD.md`
-
-idea-title should be a short, kebab-case summary of the issue. Pay attention to the user's description of the issue. If a Jira ticket is mentioned, include it as the first thing in the idea-title. Jira tickets look like DS24-123, where 123 is a sample Jira ticket number. So if the user mentions Jira ticket DS24-2113, the idea-title might be:
-DS24-2113-fix-error-dialog
+Two files will be saved:
+- **Markdown:** `<git-folder>/claude/<project-name>/plans/SPEC-<idea-title>-YYYY-MM-DD.md`
+- **Jira format:** `<git-folder>/claude/<project-name>/plans/JIRA-<idea-title>-YYYY-MM-DD.md`
 
 ---
 
@@ -137,24 +136,32 @@ Sections will cover:
 - **Components**: Individual pieces and their responsibilities  
 - **Data Flow**: How information moves through the system
 - **Error Handling**: What can go wrong and how we handle it
-- **Acceptance Criteria**: *What* do we need to verify to prove that the issue works as expected
-- **Testing Strategy**: *How* we'll verify it works (including test framework choice)
+- **Testing Strategy**: How we'll verify it works (including test framework choice)
 
 I'll be ready to go back and clarify if something doesn't make sense.
 
 ---
 
-## Step 7: Generate the Design Document
+## Step 7: Generate the Design Documents
 
 Once the design is validated, I will create a title for the idea (short, descriptive, dash-separated).
 
-Then save the document to the determined output path:
+**Naming the idea-title:**
+- Use kebab-case (lowercase with dashes)
+- Keep it short but descriptive
+- **If a Jira ticket is mentioned, include it as the first part of the idea-title**
+- Jira tickets look like `DS24-123` (project key + number)
 
-**Filename format:** `SPEC-<idea-title>-YYYY-MM-DD.md`
+**Examples:**
+- User mentions "DS24-2113" → `DS24-2113-fix-error-dialog`
+- User mentions "DS24-847 for the new auth flow" → `DS24-847-new-auth-flow`
+- No Jira ticket mentioned → `user-authentication-flow`
 
-**Example:** `SPEC-user-authentication-flow-2026-01-03.md`
+I will save **two files** with identical content but different formatting:
 
-The document will include:
+### File 1: Markdown Format (SPEC)
+
+**Filename:** `SPEC-<idea-title>-YYYY-MM-DD.md`
 
 ```markdown
 # [Idea Title]
@@ -203,10 +210,6 @@ The document will include:
 
 [What can go wrong and how we handle it]
 
-## Acceptance Criteria
-
-[A bulleted list of the criteria that will prove that the feature/fix works as expected]
-
 ## Testing Strategy
 
 [How we'll verify the implementation works]
@@ -220,16 +223,91 @@ The document will include:
 [Links to related docs, issues, or resources]
 ```
 
+### File 2: Jira Format (JIRA)
+
+**Filename:** `JIRA-<idea-title>-YYYY-MM-DD.md`
+
+Same content as the SPEC file, but formatted using Jira wiki markup:
+
+```
+h1. [Idea Title]
+
+*Created:* YYYY-MM-DD
+*Status:* Draft
+
+h2. Overview
+
+[High-level description of what we're building and why]
+
+h2. Goals
+
+* [Goal 1]
+* [Goal 2]
+
+h2. Non-Goals (Out of Scope)
+
+* [Explicitly excluded item 1]
+* [Explicitly excluded item 2]
+
+h2. Technology Decisions
+
+||Decision||Choice||Alternatives Considered||Rationale||
+|[e.g., Test Framework]|[e.g., Vitest]|Jest, Mocha|[Why this choice]|
+|[e.g., HTTP Client]|[e.g., fetch]|Axios, ky|[Why this choice]|
+
+h2. Architecture
+
+[Architecture description and diagrams if applicable]
+
+h2. Components
+
+h3. [Component 1]
+[Description and responsibilities]
+
+h3. [Component 2]
+[Description and responsibilities]
+
+h2. Data Flow
+
+[How information moves through the system]
+
+h2. Error Handling
+
+[What can go wrong and how we handle it]
+
+h2. Testing Strategy
+
+[How we'll verify the implementation works]
+
+h2. Open Questions
+
+[Any unresolved items to address during implementation]
+
+h2. References
+
+[Links to related docs, issues, or resources]
+```
+
+**Jira formatting reference:**
+- `h1.` / `h2.` / `h3.` for headings
+- `*text*` for bold
+- `_text_` for italic
+- `* item` for bullet lists
+- `# item` for numbered lists
+- `||header||header||` for table headers
+- `|cell|cell|` for table rows
+- `{code}...{code}` for code blocks
+- `[link text|URL]` for links
+
 ---
 
-## Step 8: Commit the Design
+## Step 8: Commit the Design Documents
 
-After saving the document, I will commit it to the claude directory's repo (not the current project's repo):
+After saving both documents, I will commit them to the claude directory's repo (not the current project's repo):
 
 ```bash
-# Example: git -C /home/user1/git/claude add projectA/plans/SPEC-idea-title-2026-01-03.md
-# Example: git -C /home/user1/git/claude commit -m "docs: Add spec for idea-title"
-git -C <git-folder>/claude add <project-name>/plans/<spec-filename>
+git -C <git-folder>/claude add <project-name>/plans/SPEC-<idea-title>-YYYY-MM-DD.md
+git -C <git-folder>/claude add <project-name>/plans/JIRA-<idea-title>-YYYY-MM-DD.md
 git -C <git-folder>/claude commit -m "docs: Add spec for <idea-title>"
 ```
 
@@ -243,7 +321,7 @@ git -C <git-folder>/claude commit -m "docs: Add spec for <idea-title>"
 - **YAGNI ruthlessly** - Remove unnecessary features from all designs
 - **Explore alternatives** - Always propose 2-3 approaches before settling
 - **Incremental validation** - Present design in sections, validate each
-- **Be flexible** - Go back and clarify when something doesn't make sense
+- **Be flexible** - Go back and clarify if something doesn't make sense
 
 ---
 
@@ -253,4 +331,4 @@ Once the spec is complete, I will ask:
 
 **"Ready to set up for implementation?"**
 
-If yes, we can proceed to create a detailed implementation plan by calling the Create Plan Workflow.
+If yes, we can proceed to create a detailed implementation plan.
