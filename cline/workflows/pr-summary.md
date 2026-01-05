@@ -25,7 +25,7 @@ git branch --show-current
 Get the commit history for context on what was done:
 
 ```bash
-git log origin/main..HEAD --format="%s%n%b" --reverse
+git --no-pager log origin/main..HEAD --format="%s%n%b" --reverse
 ```
 
 ---

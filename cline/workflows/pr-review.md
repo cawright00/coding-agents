@@ -25,7 +25,7 @@ git branch --show-current
 And get a summary of what's being reviewed:
 
 ```bash
-git log origin/main..HEAD --oneline
+git --no-pager log origin/main..HEAD --oneline
 ```
 
 ---
