@@ -35,13 +35,13 @@ git --no-pager log origin/main..HEAD --oneline
 I will run the following command to get the complete diff of changes:
 
 ```bash
-git diff origin/main..HEAD
+git --no-pager diff origin/main..HEAD
 ```
 
 I will also get a list of changed files for reference:
 
 ```bash
-git diff --name-status origin/main..HEAD
+git --no-pager diff --name-status origin/main..HEAD
 ```
 
 ---

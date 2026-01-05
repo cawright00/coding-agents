@@ -35,19 +35,19 @@ git --no-pager log origin/main..HEAD --format="%s%n%b" --reverse
 Get the complete diff:
 
 ```bash
-git diff origin/main..HEAD
+git --no-pager diff origin/main..HEAD
 ```
 
 Get a summary of changed files:
 
 ```bash
-git diff --stat origin/main..HEAD
+git --no-pager diff --stat origin/main..HEAD
 ```
 
 List files by change type:
 
 ```bash
-git diff --name-status origin/main..HEAD
+git --no-pager diff --name-status origin/main..HEAD
 ```
 
 ---
